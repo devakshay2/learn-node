@@ -10,7 +10,7 @@ const mongoConnect = (callback) => {
     .then((client) => {
       console.log("Connected");
       _db = client.db();
-      callback(client);
+      callback();
     })
     .catch((error) => {
       console.log(error);
@@ -19,11 +19,11 @@ const mongoConnect = (callback) => {
 };
 
 const getDb = () => {
-  if(_db) {
-    return _db
+  if (_db) {
+    return _db;
   }
   throw "Database not found.";
-}
+};
 
 exports.mongoConnect = mongoConnect;
-exports.mongoConnect = mongoConnect;
+exports.getDb = getDb;
