@@ -16,12 +16,23 @@ const AddEmployeeForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ employeeName }),
-    });
+      body: JSON.stringify({
+        name: employeeName,
+        age: employeeAge,
+        desidnation: employeeDesignation,
+        city: employeeCity,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch(() => {
+        console.log("Server error.");
+      });
   };
 
   return (
-    <>
+    <div>
+      <h1>Add Employee</h1>
       <Textfiled
         label="Employee Name"
         onChange={({ target }) => setEmployeeName(target.value)}
@@ -46,7 +57,7 @@ const AddEmployeeForm = () => {
         value={employeeCity}
       />
       <SubmitButton label={"Add Employee"} onClick={onSubmit} />
-    </>
+    </div>
   );
 };
 

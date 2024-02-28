@@ -6,12 +6,17 @@ const manageEmployees = require("./routes/manageEmployees");
 const app = express();
 const port = process.env.PORT || 3001;
 
-console.log("idr aya mai 2");
-
 app.use(express.json());
 app.use("/manageEmployees", manageEmployees);
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
   res.status(200).send({ status: "ok" });
+});
+
+app.use((req, res) => {
+  res.status(404).send({
+    error: true,
+    message: "This route is not defined. Please try specified ones.",
+  });
 });
 
 mongoConnect(() => {
