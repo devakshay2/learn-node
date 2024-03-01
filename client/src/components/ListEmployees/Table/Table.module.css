@@ -1,0 +1,26 @@
+.table {
+  width: 100%;
+  border-style: solid;
+  border-width: 0.15rem;
+  border-color: #499be4;
+  font-size: large;
+  font-family: sans-serif;
+}
+.tableHead {
+  text-align: justify;
+}
+.headerCell {
+  padding: 1rem;
+  background-color: #05ffff;
+}
+.tableCell {
+  padding: 1rem;
+  background-color: #ffcd89;
+}
+.tableCell:hover {
+  background-color: #70ffa4;
+}
+.tableActionsCell {
+  padding: 1rem;
+  text-align: end;
+}

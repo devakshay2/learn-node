@@ -4,8 +4,8 @@ import classes from "./TopBar.module.css";
 const topbarOptions = [
   { name: "Create" },
   { name: "List" },
-  { name: "Modify" },
-  { name: "Delete" },
+  // { name: "Modify" },
+  // { name: "Delete" },
 ];
 
 const TopBar = (props) => {

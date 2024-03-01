@@ -6,8 +6,9 @@ import SubmitButton from "../SubmitButton/SubmitButton";
 const AddEmployeeForm = () => {
   const [employeeName, setEmployeeName] = useState("");
   const [employeeAge, setEmployeeAge] = useState("");
-  const [employeeDesignation, setEmployeeDesignation] = useState("");
-  const [employeeCity, setEmployeeCity] = useState("");
+  const [employeeTitle, setEmployeeTitle] = useState("");
+  const [employeeNumber, setEmployeeNumber] = useState("");
+  const [employeeEmail, setEmployeeEmail] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -19,8 +20,9 @@ const AddEmployeeForm = () => {
       body: JSON.stringify({
         name: employeeName,
         age: employeeAge,
-        desidnation: employeeDesignation,
-        city: employeeCity,
+        jobTitle: employeeTitle,
+        phone: employeeNumber,
+        email: employeeEmail,
       }),
     })
       .then((response) => response.json())
@@ -47,16 +49,31 @@ const AddEmployeeForm = () => {
         max={120}
       />
       <Textfiled
-        label="Designation"
-        onChange={({ target }) => setEmployeeDesignation(target.value)}
-        value={employeeDesignation}
+        label="Title"
+        onChange={({ target }) => setEmployeeTitle(target.value)}
+        value={employeeTitle}
       />
       <Textfiled
-        label="City"
-        onChange={({ target }) => setEmployeeCity(target.value)}
-        value={employeeCity}
+        label="Number"
+        onChange={({ target }) => setEmployeeNumber(target.value)}
+        value={employeeNumber}
       />
-      <SubmitButton label={"Add Employee"} onClick={onSubmit} />
+      <Textfiled
+        label="Email"
+        onChange={({ target }) => setEmployeeEmail(target.value)}
+        value={employeeEmail}
+      />
+      <SubmitButton
+        label={"Add Employee"}
+        onClick={onSubmit}
+        disabled={
+          !employeeName ||
+          !employeeAge ||
+          !employeeTitle ||
+          !employeeNumber ||
+          !employeeEmail
+        }
+      />
     </div>
   );
 };
