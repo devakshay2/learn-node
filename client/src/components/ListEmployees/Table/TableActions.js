@@ -6,10 +6,9 @@ import DeleteIcon from "./DeleteIcon";
 import classes from "./TableActions.module.css";
 
 const TableActions = ({
+  row = {},
   isEditEnabled = false,
   isDeleteEnabled = false,
-  subgroups = [],
-  deletionCheckFiledName = "",
   openDelete = () => null,
   openEdit = () => null,
 }) => {
@@ -26,12 +25,12 @@ const TableActions = ({
             onClick={() => setIsListOpen(false)}
           >
             {isEditEnabled ? (
-              <div >
+              <div>
                 <EditIcon className={classes.icons} />
               </div>
             ) : null}
             {isDeleteEnabled ? (
-              <div >
+              <div onClick={() => openDelete(row)}>
                 <DeleteIcon className={classes.icons} />
               </div>
             ) : null}

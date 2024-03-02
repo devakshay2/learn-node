@@ -1,3 +1,4 @@
+const objectId = require("mongodb").ObjectId;
 const { mongoConnect } = require("../util/database");
 const mongoCollectionNames = require("../util/mongoCollectionNames");
 
@@ -27,7 +28,17 @@ router.post("/create", async (req, res) => {
 
 router.use("/update", (req, res, next) => {});
 
-router.use("/delete", (req, res, next) => {});
+router.post("/delete", async (req, res, next) => {
+  console.log("Deleting", req.body.id);
+  const dbClient = await mongoConnect();
+  const collection = dbClient.collection(mongoCollectionNames.EMPLOYEES);
+  const result = await collection.deleteOne({ _id: new objectId(req.body.id) });
+  console.log(result);
+  res.status(200).json({
+    error: false,
+    message: "Record Deleted successfully.",
+  });
+});
 
 router.get("/list", async (req, res) => {
   console.log("fetching data...");
@@ -35,7 +46,6 @@ router.get("/list", async (req, res) => {
     const dbclient = await mongoConnect();
     const collection = dbclient.collection(mongoCollectionNames.EMPLOYEES);
     const result = await collection.find({}).toArray();
-    console.log(result);
     res.status(200).json({
       error: false,
       message: "List loaded successfully.",

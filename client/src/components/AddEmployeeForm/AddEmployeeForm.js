@@ -54,7 +54,7 @@ const AddEmployeeForm = () => {
         value={employeeTitle}
       />
       <Textfiled
-        label="Number"
+        label="Phone"
         onChange={({ target }) => setEmployeeNumber(target.value)}
         value={employeeNumber}
       />

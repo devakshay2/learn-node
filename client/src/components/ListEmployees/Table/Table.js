@@ -1,31 +1,77 @@
+import { useState } from "react";
 import TableActions from "./TableActions";
+import DeleteDialog from "../../Dialogs/DeleteDialog/DeleteDialog";
 import classes from "./Table.module.css";
 
-const Table = ({ headers = [], data = [] }) => {
-  console.log(headers);
+const Table = ({
+  headers = [],
+  data = [],
+  updateTable = () => null,
+  isTableActions = false,
+}) => {
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState({});
+
+  const onDeleteOpen = (row) => {
+    setSelectedRecord(row);
+    setDeleteDialogOpen(true);
+  };
+
+  const setDeleteOpenClose = (ifOpen) => {
+    if (!ifOpen) {
+      setSelectedRecord({});
+    }
+    setDeleteDialogOpen(ifOpen);
+  };
+
   return (
-    <table className={classes.table}>
-      <thead className={classes.tableHead}>
-        <tr>
-          {headers.map((item) => {
-            return <th className={classes.headerCell}>{item}</th>;
-          })}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item) => (
+    <div>
+      <table className={classes.table}>
+        <thead className={classes.tableHead}>
           <tr>
-            <td className={classes.tableCell}>{item.name}</td>
-            <td className={classes.tableCell}>{item.age}</td>
-            <td className={classes.tableCell}>{item.jobTitle}</td>
-            <td className={classes.tableCell}>{item.phone}</td>
-            <td className={classes.tableActionsCell}>
-              <TableActions isEditEnabled isDeleteEnabled />
-            </td>
+            {headers.map((item) => {
+              return (
+                <th className={classes.headerCell} key={item}>
+                  {item}
+                </th>
+              );
+            })}
+            {isTableActions ? (
+              <th className={classes.tableHead}>Actions</th>
+            ) : null}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {data.map((item, index) => (
+            <tr key={`${item.phone}-${index}`}>
+              <td className={classes.tableCell}>{item.name}</td>
+              <td className={classes.tableCell}>{item.age}</td>
+              <td className={classes.tableCell}>{item.jobTitle}</td>
+              <td className={classes.tableCell}>{item.phone}</td>
+              {isTableActions ? (
+                <td className={classes.tableActionsCell}>
+                  <TableActions
+                    isEditEnabled
+                    isDeleteEnabled
+                    openDelete={onDeleteOpen}
+                    row={item}
+                  />
+                </td>
+              ) : null}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {deleteDialogOpen ? (
+        <DeleteDialog
+          updateTable={updateTable}
+          setOpen={setDeleteOpenClose}
+          open={deleteDialogOpen}
+          row={selectedRecord}
+        />
+      ) : null}
+    </div>
   );
 };
 
