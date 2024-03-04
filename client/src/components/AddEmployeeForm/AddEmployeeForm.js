@@ -4,11 +4,15 @@ import Textfiled from "../TextField/Textfiled";
 import SubmitButton from "../SubmitButton/SubmitButton";
 
 const AddEmployeeForm = () => {
-  const [employeeName, setEmployeeName] = useState("");
-  const [employeeAge, setEmployeeAge] = useState("");
-  const [employeeTitle, setEmployeeTitle] = useState("");
-  const [employeeNumber, setEmployeeNumber] = useState("");
-  const [employeeEmail, setEmployeeEmail] = useState("");
+  const [epmloyeeObj, setEmployeeObj] = useState({
+    name: "",
+    age: 18,
+    jobTitle: "",
+    phone: "",
+    email: "",
+  });
+  const [isDOne, setIsDone] = useState(false);
+  const [message, setMessage] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -17,61 +21,85 @@ const AddEmployeeForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        name: employeeName,
-        age: employeeAge,
-        jobTitle: employeeTitle,
-        phone: employeeNumber,
-        email: employeeEmail,
-      }),
+      body: JSON.stringify(epmloyeeObj),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        setIsDone(true);
+        setMessage(data.message);
+        setEmployeeObj({
+          name: "",
+          age: 18,
+          jobTitle: "",
+          phone: "",
+          email: "",
+        });
+        setTimeout(() => {
+          setIsDone(false);
+          setMessage("");
+        }, 3000);
+      })
       .catch(() => {
-        console.log("Server error.");
+        setIsDone(true);
+        setMessage("Error while creating employee.");
+        setTimeout(() => {
+          setIsDone(false);
+          setMessage("");
+        }, 3000);
       });
   };
 
   return (
     <div>
       <h1>Add Employee</h1>
+      {isDOne ? <p>{message}</p> : null}
       <Textfiled
         label="Employee Name"
-        onChange={({ target }) => setEmployeeName(target.value)}
-        value={employeeName}
+        onChange={({ target }) =>
+          setEmployeeObj({ ...epmloyeeObj, name: target.value })
+        }
+        value={epmloyeeObj["name"]}
       />
       <Textfiled
         label="Age"
-        onChange={({ target }) => setEmployeeAge(target.value)}
-        value={employeeAge}
+        onChange={({ target }) =>
+          setEmployeeObj({ ...epmloyeeObj, age: target.value })
+        }
+        value={epmloyeeObj["age"]}
         type="number"
         min={18}
         max={120}
       />
       <Textfiled
         label="Title"
-        onChange={({ target }) => setEmployeeTitle(target.value)}
-        value={employeeTitle}
+        onChange={({ target }) =>
+          setEmployeeObj({ ...epmloyeeObj, jobTitle: target.value })
+        }
+        value={epmloyeeObj["jobTitle"]}
       />
       <Textfiled
         label="Phone"
-        onChange={({ target }) => setEmployeeNumber(target.value)}
-        value={employeeNumber}
+        onChange={({ target }) =>
+          setEmployeeObj({ ...epmloyeeObj, phone: target.value })
+        }
+        value={epmloyeeObj["phone"]}
       />
       <Textfiled
         label="Email"
-        onChange={({ target }) => setEmployeeEmail(target.value)}
-        value={employeeEmail}
+        onChange={({ target }) =>
+          setEmployeeObj({ ...epmloyeeObj, email: target.value })
+        }
+        value={epmloyeeObj["email"]}
       />
       <SubmitButton
         label={"Add Employee"}
         onClick={onSubmit}
         disabled={
-          !employeeName ||
-          !employeeAge ||
-          !employeeTitle ||
-          !employeeNumber ||
-          !employeeEmail
+          !epmloyeeObj["name"] ||
+          !epmloyeeObj["age"] ||
+          !epmloyeeObj["jobTitle"] ||
+          !epmloyeeObj["phone"] ||
+          !epmloyeeObj["email"]
         }
       />
     </div>

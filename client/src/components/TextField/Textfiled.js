@@ -5,13 +5,14 @@ const Textfiled = ({
   type = "text",
   value = "",
   onChange = () => null,
+  inputClass = "",
   ...restProps
 }) => {
   return (
     <div>
       <label className={classes.textLabel}>{label}</label>
       <input
-        className={classes.textInput}
+        className={`${classes.textInput} ${inputClass}`}
         type={type || "text"}
         value={value}
         onChange={onChange}

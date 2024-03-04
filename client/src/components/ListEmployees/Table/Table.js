@@ -1,6 +1,8 @@
 import { useState } from "react";
+
 import TableActions from "./TableActions";
 import DeleteDialog from "../../Dialogs/DeleteDialog/DeleteDialog";
+import EditDialog from "../../Dialogs/EditDialog/EditDialog";
 import classes from "./Table.module.css";
 
 const Table = ({
@@ -18,11 +20,23 @@ const Table = ({
     setDeleteDialogOpen(true);
   };
 
+  const onEditOpen = (row) => {
+    setSelectedRecord(row);
+    setEditDialogOpen(true);
+  };
+
   const setDeleteOpenClose = (ifOpen) => {
     if (!ifOpen) {
       setSelectedRecord({});
     }
     setDeleteDialogOpen(ifOpen);
+  };
+
+  const setEditOpenClose = (ifOpen) => {
+    if (!ifOpen) {
+      setSelectedRecord({});
+    }
+    setEditDialogOpen(ifOpen);
   };
 
   return (
@@ -55,6 +69,7 @@ const Table = ({
                     isEditEnabled
                     isDeleteEnabled
                     openDelete={onDeleteOpen}
+                    openEdit={onEditOpen}
                     row={item}
                   />
                 </td>
@@ -68,6 +83,14 @@ const Table = ({
           updateTable={updateTable}
           setOpen={setDeleteOpenClose}
           open={deleteDialogOpen}
+          row={selectedRecord}
+        />
+      ) : null}
+      {editDialogOpen ? (
+        <EditDialog
+          updateTable={updateTable}
+          setOpen={setEditOpenClose}
+          open={editDialogOpen}
           row={selectedRecord}
         />
       ) : null}

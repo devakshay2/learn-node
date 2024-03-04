@@ -1,0 +1,58 @@
+.hiddenDiv {
+  z-index: 1;
+  position: fixed;
+  inset: 0px;
+  background-color: rgba(0, 0, 0, 0.15);
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vw;
+}
+.dialog {
+  position: absolute;
+  z-index: 2;
+}
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+.modal {
+  background: white;
+  color: white;
+  z-index: 10;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  row-gap: 0.5rem;
+  font-family: sans-serif;
+  color: black;
+  font-size: 1.2rem;
+  background-color: rgb(229 243 255);
+  padding: 2rem;
+}
+.dialogContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.text {
+  font-size: 1.5rem;
+  margin: 0;
+  width: 80%;
+  padding: 1rem;
+}
+.input {
+  width: 25rem;
+}

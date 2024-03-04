@@ -26,7 +26,10 @@ const TableActions = ({
           >
             {isEditEnabled ? (
               <div>
-                <EditIcon className={classes.icons} />
+                <EditIcon
+                  className={classes.icons}
+                  onClick={() => openEdit(row)}
+                />
               </div>
             ) : null}
             {isDeleteEnabled ? (
