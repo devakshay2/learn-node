@@ -8,6 +8,8 @@
 }
 .tableHead {
   text-align: justify;
+  position: sticky;
+  top: 0;
 }
 .headerCell {
   padding: 1rem;
@@ -23,4 +25,17 @@
 .tableActionsCell {
   padding: 1rem;
   text-align: end;
+}
+.tableParent {
+  overflow-y: scroll;
+  max-height: 38rem;
+}
+.tableParent::-webkit-scrollbar {
+  background-color: #499be4;
+}
+.tableParent::-webkit-scrollbar-thumb {
+  background-color: #ffcd89;
+}
+.tableParent::-webkit-scrollbar-track:hover {
+  background-color: #70ffa4;
 }

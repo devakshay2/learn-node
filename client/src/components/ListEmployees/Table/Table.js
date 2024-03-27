@@ -40,7 +40,7 @@ const Table = ({
   };
 
   return (
-    <div>
+    <div className={classes.tableParent}>
       <table className={classes.table}>
         <thead className={classes.tableHead}>
           <tr>
@@ -76,6 +76,13 @@ const Table = ({
               ) : null}
             </tr>
           ))}
+          <tr>
+            <td className={classes.tableCell}>&nbsp;</td>
+            <td className={classes.tableCell}>&nbsp;</td>
+            <td className={classes.tableCell}>&nbsp;</td>
+            <td className={classes.tableCell}>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
         </tbody>
       </table>
       {deleteDialogOpen ? (
