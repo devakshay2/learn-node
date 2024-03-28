@@ -1,2 +1,2 @@
-server -> npm install -> npm start
+server -> npm install -> npm run dev
 client -> npm install -> npm start

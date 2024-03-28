@@ -22,7 +22,7 @@ app.use((req, res) => {
   });
 });
 
-app.use((error, req, res) => {
+app.use((error, req, res, next) => {
   console.log("Middleware Error Hadnling");
   const errStatus = error.statusCode || 500;
   const errMsg = error.message || "Something went wrong";
